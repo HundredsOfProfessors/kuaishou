@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kuaishou.demo.mapper.VideoMapper">
+    <insert id="addVideo">
+        INSERT  INTO video
+        SET video_type=#{videoType},video_url=#{videoUrl},
+            view_count=#{viewCount},down_state=#{downState},
+            caption=#{caption},file_name=#{fileName}
+    </insert>
+</mapper>

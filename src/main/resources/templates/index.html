@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 1200px;
+            height:800px;
+            margin: 50px auto;
+            boder:1px solid black;
+        }
+        .pox{
+            border:1px solid red;
+            float: left;
+            margin-right: 30px;
+            margin-bottom: 10px;
+        }
+        .pox video{
+            width: 330px;
+        }
+    </style>
+    <script src="webjars/jquery/3.3.1/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div id="box">
+
+    </div>
+
+    <script>
+        $(function(){
+            $.ajax({
+                url:"demo1",
+                async:true,
+                type:"get",
+                success:function(data){
+                    //alert("访问成功,服务器返回的数据为:"+data);
+                    var _date=JSON.parse(data);
+                    var _str="";
+                    var str="<div class='pox'><video src='' controls autoplay='false' preload='auto'></video></div>";
+                    for(var i=0;i<_date.feeds.length;i++){
+                       _str=_str+str;
+                    }
+                    $("#box").append(_str);
+                    for(var i=0;i<_date.feeds.length;i++){
+                        var url=_date.feeds[i].main_mv_urls;
+                        var _url=url[0].url.split("?")[0];
+                        $(".pox video").eq(i).attr("src",_url);
+                    }
+                },
+                error:function(){
+                    alert("请求失败");
+                },
+                dataType:"text"
+            });
+        })
+    </script>
+</body>
+</html>
